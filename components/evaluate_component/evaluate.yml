@@ -17,7 +17,7 @@ inputs:
     default: Not Potable,Potable
   
 outputs:
-  report_ouptput:
+  report_output:
     type: uri_file
   
 code: ./src
@@ -28,4 +28,4 @@ command: >-
   --predict_data ${{inputs.predict_data}} 
   --objective ${{inputs.objective}} 
   --target_names ${{inputs.target_names}} 
-  --report_ouptput ${{outputs.report_ouptput}}
+  --report_ouptput ${{outputs.report_output}}
