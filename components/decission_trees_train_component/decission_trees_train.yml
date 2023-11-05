@@ -1,0 +1,40 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+
+name: decision_tree_1
+display_name: Decision Tree Train 1
+type: command
+
+inputs:
+  train_data: 
+    type: uri_file
+  objective: 
+    type: string
+    default: Potability
+  criterion: 
+    type: string
+    default: entropy
+    enum:
+      - gini
+      - entropy
+      - log_loss
+  min_samples_split:
+    type: number
+    default: 3
+  max_depth:
+    type: number
+    default: 4
+  
+outputs:
+  model_output:
+    type: uri_file
+
+code: ./src
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
+command: >-
+  python decision_tree_train.py 
+  --train_data ${{inputs.train_data}} 
+  --objective ${{inputs.objective}}
+  --criterion ${{inputs.criterion}}
+  --min_samples_split ${{inputs.min_samples_split}}
+  --max_depth ${{inputs.max_depth}}
+  --model_output ${{outputs.model_output}}
