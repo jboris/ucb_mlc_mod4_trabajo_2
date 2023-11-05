@@ -24,7 +24,8 @@ code: ./src
 environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
 command: >-
   python evaluate.py 
-  --split_data ${{inputs.split_data}} 
-  --split_test_rate ${{inputs.split_test_rate}}
-  --train_output ${{outputs.train_output}}
-  --test_output ${{outputs.test_output}}
+  --test_data ${{inputs.test_data}} 
+  --predict_data ${{inputs.predict_data}} 
+  --objective ${{inputs.objective}} 
+  --target_names ${{inputs.target_names}} 
+  --report_ouptput ${{outputs.report_ouptput}}
