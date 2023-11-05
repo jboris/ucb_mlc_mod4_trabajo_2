@@ -1,0 +1,23 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+
+name: description_1
+display_name: Description 1
+type: command
+
+inputs:
+  data: 
+    type: uri_file
+  
+outputs:
+  info_output:
+    type: uri_file
+  describe_output:
+    type: uri_file
+
+code: ./src
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
+command: >-
+  python description.py 
+  --data ${{inputs.data}} 
+  --info_output ${{outputs.info_output}}
+  --describe_output ${{outputs.describe_output}}
