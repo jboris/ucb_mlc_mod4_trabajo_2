@@ -1,0 +1,30 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+
+name: evaluate_1
+display_name: Evaluate 1
+type: command
+
+inputs:
+  test_data: 
+    type: uri_file
+  predict_data: 
+    type: uri_file
+  objective:
+    type: string
+    default: Potability
+  target_names:
+    type: string
+    default: Not Potable,Potable
+  
+outputs:
+  report_ouptput:
+    type: uri_file
+  
+code: ./src
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
+command: >-
+  python evaluate.py 
+  --split_data ${{inputs.split_data}} 
+  --split_test_rate ${{inputs.split_test_rate}}
+  --train_output ${{outputs.train_output}}
+  --test_output ${{outputs.test_output}}
