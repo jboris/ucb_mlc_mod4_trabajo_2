@@ -1,0 +1,24 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+
+name: logistic_regression_train_1
+display_name: Logistic Regression Train 1
+type: command
+
+inputs:
+  train_data: 
+    type: uri_file
+  objective: 
+    type: string
+    default: Potability
+  
+outputs:
+  model_output:
+    type: uri_file
+
+code: ./src
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
+command: >-
+  python logistic_regression_train.py 
+  --train_data ${{inputs.train_data}} 
+  --objective ${{inputs.objective}}
+  --model_output ${{outputs.model_output}}
