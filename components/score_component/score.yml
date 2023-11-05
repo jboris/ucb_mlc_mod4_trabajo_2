@@ -9,6 +9,9 @@ inputs:
     type: uri_file
   test_data: 
     type: uri_file  
+  objective:
+    type: string
+    default: Potability
   
 outputs:
   predict_output:
@@ -20,4 +23,5 @@ command: >-
   python score.py 
   --model ${{inputs.model}} 
   --test_data ${{inputs.test_data}}
+  --objective ${{inputs.objective}}
   --predict_output ${{outputs.predict_output}}
