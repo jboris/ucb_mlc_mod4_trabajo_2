@@ -1,0 +1,78 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+
+name: correlation_1
+display_name: Correlation 1
+type: command
+
+inputs:
+  data: 
+    type: uri_file
+  method: 
+    type: string
+    default: pearson
+    enum:
+      - pearson
+      - kendall
+      - spearman
+  color_palette:
+    type: string
+    default: coolwarm
+    enum:
+      - PiYG
+      - PRGn 
+      - BrBG 
+      - PuOr
+      - RdGy
+      - RdBu
+      - RdYlBu
+      - RdYlGn
+      - Spectral
+      - coolwarm
+      - bwr
+      - seismic
+  style:
+    type: string
+    default: ticks
+    enum:
+      - ticks
+      - white
+      - whitegrid
+    
+  diag_kind:
+    type: string
+    default: kde
+    enum:
+      - auto
+      - hist
+      - kde
+      
+  matrix_title:
+    type: string
+    default: Correlation Heatmap
+    
+  pairplot_title:
+    type: string
+    default: Pair Plot of Columns
+  
+outputs:
+  matrix_output:
+    type: uri_file
+  matrix_image_output:
+    type: uri_file
+  pairplot_image_output:
+    type: uri_file
+
+code: ./src
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
+command: >-
+  python correlation.py 
+  --data ${{inputs.data}} 
+  --method ${{inputs.method}} 
+  --color_palette ${{inputs.color_palette}}  
+  --style ${{inputs.style}} 
+  --matrix_title ${{inputs.matrix_title}}
+  --diag_kind ${{inputs.diag_kind}}
+  --pairplot_title ${{inputs.pairplot_title}}
+  --matrix_output ${{outputs.matrix_output}}
+  --matrix_image_output ${{outputs.matrix_image_output}}
+  --pairplot_image_output ${{outputs.pairplot_image_output}}
