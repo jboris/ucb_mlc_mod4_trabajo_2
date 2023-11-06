@@ -8,8 +8,6 @@ parser.add_argument("--data", type=str, help="Path to data")
 parser.add_argument("--method", type=str, help="Method of correlation")
 parser.add_argument("--color_palette", type=str, help="Color palette")
 parser.add_argument("--style", type=str, help="Style")
-parser.add_argument("--matrix_title", type=str, help="Matrix title")
-parser.add_argument("--pairplot_title", type=str, help="Pair plot title")
 parser.add_argument("--matrix_output", type=str, help="Path of matrix")
 parser.add_argument("--matrix_image_output", type=str, help="Path of matrix image")
 parser.add_argument("--pairplot_image_output", type=str, help="Path of Pair plot image")
@@ -20,8 +18,6 @@ lines = [
     f"Method of correlation: {args.method}",
     f"Color palette: {args.color_palette}",
     f"Style: {args.style}",
-    f"Matrix title: {args.matrix_title}",
-    f"Pair plot title: {args.pairplot_title}",
     f'Path of matrix: {args.matrix_output}',
     f'Path of matrix image: {args.matrix_image_output}',
     f'Path of Pair plot image: {args.pairplot_image_output}',
@@ -38,7 +34,7 @@ correlation_matrix.to_csv(args.matrix_output, index=False)
 plt.style.use(args.style)
 fig, ax = plt.subplots(figsize=(8, 8))
 cax = ax.matshow(correlation_matrix, cmap=args.color_palette, vmin=-1, vmax=1)
-plt.title(args.matrix_title)
+plt.title('Correlation Heatmap')
 plt.colorbar(cax)
 ax.set_yticks(np.arange(len(correlation_matrix.columns)))
 ax.set_yticklabels(correlation_matrix.columns)
@@ -65,7 +61,7 @@ for i, column1 in enumerate(data.columns):
         else:
             ax = axes[i, j]
             ax.scatter(data[column2], data[column1], marker='o', s=15, c='b', edgecolor='k', linewidth=0.5)
-plt.suptitle(args.pairplot_title)
+plt.suptitle('Pair Plot of Columns')
 plt.tight_layout()
 plt.savefig(args.pairplot_image_output)
 

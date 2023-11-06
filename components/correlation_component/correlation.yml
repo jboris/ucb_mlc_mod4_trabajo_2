@@ -37,14 +37,6 @@ inputs:
       - classic
       - fast
       - ggplot
-      
-  matrix_title:
-    type: string
-    default: Correlation Heatmap
-    
-  pairplot_title:
-    type: string
-    default: Pair Plot of Columns
   
 outputs:
   matrix_output:
