@@ -32,19 +32,11 @@ inputs:
       - seismic
   style:
     type: string
-    default: ticks
+    default: ggplot
     enum:
-      - ticks
-      - white
-      - whitegrid
-    
-  diag_kind:
-    type: string
-    default: kde
-    enum:
-      - auto
-      - hist
-      - kde
+      - classic
+      - fast
+      - ggplot
       
   matrix_title:
     type: string
