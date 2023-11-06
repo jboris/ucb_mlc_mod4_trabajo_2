@@ -12,7 +12,7 @@ inputs:
   objective:
     type: string
     default: Potability
-  target_names:
+  target_name:
     type: string
   
 outputs:
@@ -26,5 +26,5 @@ command: >-
   --test_data ${{inputs.test_data}} 
   --predict_data ${{inputs.predict_data}} 
   --objective ${{inputs.objective}} 
-  --target_names ${{inputs.target_names}} 
+  --target_name ${{inputs.target_name}} 
   --report_ouptput ${{outputs.report_output}}

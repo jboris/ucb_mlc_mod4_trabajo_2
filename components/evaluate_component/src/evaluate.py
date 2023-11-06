@@ -32,7 +32,6 @@ test = pd.read_csv(args.test_data)[args.objective]
 predict = pd.read_csv(args.predict_data)
 target_names=['Not ' + args.target_name, args.target_name]
 report = classification_report(test, predict, target_names=target_names)
-print(report)
 df_report = pd.read_csv(StringIO(report), sep="\\s+")
 df_report.to_csv(args.report_output)
 
