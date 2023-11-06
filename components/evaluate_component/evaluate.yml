@@ -27,4 +27,4 @@ command: >-
   --predict_data ${{inputs.predict_data}} 
   --objective ${{inputs.objective}} 
   --target_name ${{inputs.target_name}} 
-  --report_ouptput ${{outputs.report_output}}
+  --report_output ${{outputs.report_output}}
