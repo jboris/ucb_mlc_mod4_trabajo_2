@@ -2,15 +2,14 @@ import argparse
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
 
 parser = argparse.ArgumentParser("correlation")
 parser.add_argument("--data", type=str, help="Path to data")
 parser.add_argument("--method", type=str, help="Method of correlation")
 parser.add_argument("--color_palette", type=str, help="Color palette")
 parser.add_argument("--style", type=str, help="Style")
-parser.add_argument("--matrix_output", type=str, help="Path of matrix")
-parser.add_argument("--matrix_image_output", type=str, help="Path of matrix image")
-parser.add_argument("--pairplot_image_output", type=str, help="Path of Pair plot image")
+parser.add_argument("--results_output", type=str, help="Path of results")
 
 args = parser.parse_args()
 lines = [
@@ -18,9 +17,7 @@ lines = [
     f"Method of correlation: {args.method}",
     f"Color palette: {args.color_palette}",
     f"Style: {args.style}",
-    f'Path of matrix: {args.matrix_output}',
-    f'Path of matrix image: {args.matrix_image_output}',
-    f'Path of Pair plot image: {args.pairplot_image_output}',
+    f'Path of results: {args.results_output}',
 ]
 
 print("Parámetros: ...")
@@ -29,7 +26,7 @@ for line in lines:
 
 data = pd.read_csv(args.data)
 correlation_matrix = data.corr(method=args.method)
-correlation_matrix.to_csv(args.matrix_output, index=False)
+correlation_matrix.to_csv((Path(args.results_output) / 'matrix.csv'), index=False)
 
 plt.style.use(args.style)
 fig, ax = plt.subplots(figsize=(8, 8))
@@ -42,7 +39,7 @@ for i in range(len(correlation_matrix)):
     for j in range(len(correlation_matrix)):
         text = ax.text(j, i, f'{correlation_matrix.iloc[i, j]:.2f}', ha='center', va='center', color='black')
 ax.grid(False)
-plt.savefig(args.matrix_image_output)
+plt.savefig((Path(args.results_output) / 'matrix.jpg'))
 
 plt.style.use(args.style)
 fig, axes = plt.subplots(nrows=len(data.columns), ncols=len(data.columns), figsize=(12,12))
@@ -63,5 +60,5 @@ for i, column1 in enumerate(data.columns):
             ax.scatter(data[column2], data[column1], marker='o', s=15, c='b', edgecolor='k', linewidth=0.5)
 plt.suptitle('Pair Plot of Columns')
 plt.tight_layout()
-plt.savefig(args.pairplot_image_output)
+plt.savefig((Path(args.results_output) / 'pairplot.jpg'))
 

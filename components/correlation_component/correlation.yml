@@ -39,12 +39,8 @@ inputs:
       - ggplot
   
 outputs:
-  matrix_output:
-    type: uri_file
-  matrix_image_output:
-    type: uri_file
-  pairplot_image_output:
-    type: uri_file
+  results_output:
+    type: uri_folder
 
 code: ./src
 environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
@@ -54,6 +50,4 @@ command: >-
   --method ${{inputs.method}} 
   --color_palette ${{inputs.color_palette}}  
   --style ${{inputs.style}} 
-  --matrix_output ${{outputs.matrix_output}}
-  --matrix_image_output ${{outputs.matrix_image_output}}
-  --pairplot_image_output ${{outputs.pairplot_image_output}}
+  --results_output ${{outputs.results_output}}
